@@ -94,7 +94,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpringSoftware.Web\SchoolSite.Web.csproj">
+    <ProjectReference Include="..\SchoolSite.Web\SchoolSite.Web.csproj">
       <Project>{b77b456e-eb1e-4ba6-a9e9-ae9f93d9adad}</Project>
       <Name>SchoolSite.Web</Name>
     </ProjectReference>
