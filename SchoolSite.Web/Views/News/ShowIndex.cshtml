@@ -1,6 +1,7 @@
-﻿@using SpringSoftware.Web.Help
+﻿
 @model PagedList.IPagedList<SchoolSite.Core.DbModel.News>
 @using PagedList.Mvc;
+@using SchoolSite.Web.Help
  
 <h2>@ViewBag.Title</h2>
 @using (Html.BeginForm("ShowIndex", "News", new { id = @ViewBag.NewsTypeId, }, FormMethod.Get))
