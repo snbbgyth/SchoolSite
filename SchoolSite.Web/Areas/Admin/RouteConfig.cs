@@ -10,7 +10,7 @@ namespace SchoolSite.Web.Areas.Admin
                 "Admin_Default",
                 "Admin/{controller}/{action}/{id}",
                 new {controller = "News", action = "Index", area = "Admin", id = ""},
-                new[] { "SpringSoftware.Web.Areas.Admin.Controllers" });
+                new[] { "SchoolSite.Web.Areas.Admin.Controllers" });
         }
     }
 }

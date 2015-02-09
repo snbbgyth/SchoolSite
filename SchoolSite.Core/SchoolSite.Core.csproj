@@ -104,6 +104,7 @@
     <Compile Include="DbModel\News.cs" />
     <Compile Include="DbModel\NewsType.cs" />
     <Compile Include="DbModel\OtherLogInfo.cs" />
+    <Compile Include="DbModel\SchoolInfo.cs" />
     <Compile Include="DbModel\WebContent.cs" />
     <Compile Include="DbModel\WebContentType.cs" />
     <Compile Include="Help\Constants.cs" />

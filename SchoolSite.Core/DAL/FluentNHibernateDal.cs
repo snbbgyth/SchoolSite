@@ -144,7 +144,7 @@ namespace SchoolSite.Core.DAL
     {
         public override bool ShouldMap(Type type)
         {
-            return type.Namespace == "SpringSoftware.Core.DbModel";
+            return type.Namespace == "SchoolSite.Core.DbModel";
         }
 
         public override bool IsComponent(Type type)

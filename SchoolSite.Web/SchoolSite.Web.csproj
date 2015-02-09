@@ -226,6 +226,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\SchoolInfoController.cs" />
     <Compile Include="DAL\Payment\AliPayPaymentProcessor.cs" />
     <Compile Include="DAL\BaseController.cs" />
     <Compile Include="DAL\Payment\ChinaPay.cs" />
@@ -815,7 +816,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -862,6 +865,8 @@
     <Content Include="Scripts\tinymce\plugins\Roxy_Fileman\web.config" />
     <Content Include="Scripts\tinymce\plugins\Roxy_Fileman\lang\zh_CN.json" />
     <Content Include="Views\News\ShowIndex.cshtml" />
+    <Content Include="Views\SchoolInfo\Index.cshtml" />
+    <Content Include="Views\SchoolInfo\SchoolIntroduction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

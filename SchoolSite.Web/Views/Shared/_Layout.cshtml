@@ -56,36 +56,67 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            @{
-    
-                var newsTypeList = NewsManage.QueryAllNewsTypes();
-            }
+     
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("企业简介", "CompanyIntro", "Home")</li>
+                    <li>@Html.ActionLink("首页", "Index", "Home")</li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">产品介绍<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">学校概况<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("网站产品", "WebSiteProductIntro", "Home")</li>
-                            <li>@Html.ActionLink("软件产品", "SoftwareProductIntro", "Home")</li>
-                            <li>@Html.ActionLink("培训", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("学校简介", "WebSiteProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("学校领导", "SoftwareProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("校园风光", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("教师风采", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("电子地图", "TrainProductIntro", "Home")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("学校新闻", "Index", "News")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">部门动态<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("党政办", "WebSiteProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("政教处", "SoftwareProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("教务处", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("科研处", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("总务处", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("工会", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("团委学生会", "TrainProductIntro", "Home")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">新闻<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">荣誉殿堂<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @foreach (var newsType in newsTypeList)
-                            {
-                                <li>@Html.ActionLink(newsType.Name, "ShowIndex", "News", new { id = newsType.Id },string.Empty)</li>
-                            }
+                            <li>@Html.ActionLink("学校荣誉", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("教师荣誉", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("学生荣誉", "TrainProductIntro", "Home")</li>
                         </ul>
                     </li>
- 
-                    <li>@Html.ActionLink("关于我们", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("留言", "Create", "Comments")</li>
- 
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">党建天地<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("学校党建", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("党建动态", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("群众路线教育", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("创先争优", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("党建知识", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("党员教育", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("学习与交流", "TrainProductIntro", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">德育之窗<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("文明班级", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("值周小结", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("心理健康", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("德育周报", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("文明寝室", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("光荣榜", "TrainProductIntro", "Home")</li>
+                            <li>@Html.ActionLink("学生心生", "TrainProductIntro", "Home")</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("校图书馆", "About", "Home")</li>
+                    <li>@Html.ActionLink("家长留言", "Create", "Comments")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

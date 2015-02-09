@@ -12,7 +12,7 @@ namespace SchoolSite.Web
                "Default",
                "{controller}/{action}/{id}",
                new { controller = "Home", action = "Index", id = UrlParameter.Optional, Area = "Home" },
-              new string[] { "SpringSoftware.Web.Controllers" }
+              new string[] { "SchoolSite.Web.Controllers" }
           );
 
         }
