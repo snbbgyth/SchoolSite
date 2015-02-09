@@ -1,0 +1,34 @@
+﻿@model PagedList.IPagedList<SchoolSite.Core.DbModel.WebContent>
+@using PagedList.Mvc;
+@using SchoolSite.Web.Help
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("SchoolIntroduction", "SchoolInfo", FormMethod.Get))
+{
+    <p>
+        输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        <div>
+            <img width="150" height="140" alt="" src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" />
+        </div>
+        <div>
+            <a href="/SchoolInfo/SchoolSceneryDetail/@item.Id">@item.Title</a>
+
+        </div>
+    </div>
+}
+
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("SchoolIntroduction",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+

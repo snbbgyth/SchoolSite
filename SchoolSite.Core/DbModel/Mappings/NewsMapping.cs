@@ -12,12 +12,10 @@ namespace SchoolSite.Core.DbModel.Mappings
             Map(x => x.IsDelete);
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
-
             Map(x => x.IsPublish);
             Map(x => x.Content);
             Map(x => x.Title);
             References(x => x.NewsType, "NewsTypeId").Not.LazyLoad();
-
             HasManyToMany(x => x.NewsTypeList)
               .Cascade.All()
               .Inverse()

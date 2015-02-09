@@ -142,11 +142,6 @@ namespace SchoolSite.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    //var queryString = string.Format("delete from {0} where Id = :id ", typeof(T).Name);
-                    //reslut = session.CreateQuery(queryString)
-                    //                .SetParameter("id", id)
-                    //                .ExecuteUpdate();
-
                     session.Delete(string.Format("from {0} where id = {1}", typeof (T).Name, id));
                     session.Flush();
                 }
@@ -257,7 +252,6 @@ namespace SchoolSite.Core.DAL
         /// <returns>ClientTableState entity</returns>
         public T FirstOrDefault(Expression<Func<T, bool>> fun)
         {
-
             try
             {
                 var entityList = QueryByFun(fun);

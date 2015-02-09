@@ -12,10 +12,11 @@ namespace SchoolSite.Core.DbModel.Mappings
             Map(x => x.IsDelete);
             Map(x => x.LastModifier);
             Map(x => x.LastModifyDate);
-
             Map(x => x.Content).Length(5000);
             Map(x => x.WebContentTypeId);
             Map(x => x.DisplayOrder);
+            Map(x => x.Title);
+            Map(x => x.ImageForTitle);
         }
     }
 }

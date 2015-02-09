@@ -357,7 +357,6 @@
     <Content Include="Areas\Admin\Views\WebContentTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\WebContentTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <None Include="Properties\PublishProfiles\SpringSoftwareWeb.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
@@ -867,6 +866,10 @@
     <Content Include="Views\News\ShowIndex.cshtml" />
     <Content Include="Views\SchoolInfo\Index.cshtml" />
     <Content Include="Views\SchoolInfo\SchoolIntroduction.cshtml" />
+    <Content Include="Views\SchoolInfo\SchoolLeader.cshtml" />
+    <Content Include="Views\SchoolInfo\SchoolLeaderDetail.cshtml" />
+    <Content Include="Views\SchoolInfo\SchoolScenery.cshtml" />
+    <Content Include="Views\SchoolInfo\SchoolSceneryDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -908,7 +911,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>7246</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:7246/</IISUrl>
+          <IISUrl>http://localhost:7241/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

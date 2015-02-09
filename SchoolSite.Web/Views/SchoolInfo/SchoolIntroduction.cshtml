@@ -1,6 +1,6 @@
-﻿
+﻿@model SchoolSite.Core.DbModel.WebContent
 @{
     ViewBag.Title = "学校简介";
 }
 
-<h2>学校简介</h2>
+@Html.Raw(Model.Content)

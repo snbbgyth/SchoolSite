@@ -16,7 +16,6 @@ namespace SchoolSite.Core.BLL
             builder.RegisterType<NewsDal>().As<INewsDal>();
             builder.RegisterType<NewsTypeDal>().As<INewsTypeDal>();
             builder.RegisterType<CommentDal>().As<ICommentDal>();
-
             builder.RegisterType<WebContentDal>().As<IWebContentDal>();
             builder.RegisterType<WebContentTypeDal>().As<IWebContentTypeDal>();
         }
