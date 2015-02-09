@@ -16,13 +16,7 @@ namespace SchoolSite.Core.BLL
             builder.RegisterType<NewsDal>().As<INewsDal>();
             builder.RegisterType<NewsTypeDal>().As<INewsTypeDal>();
             builder.RegisterType<CommentDal>().As<ICommentDal>();
-            builder.RegisterType<OrderDal>().As<IOrderDal>();
-            builder.RegisterType<OrderItemDal>().As<IOrderItemDal>();
-            builder.RegisterType<ProductDal>().As<IProductDal>();
-            builder.RegisterType<ProductTypeDal>().As<IProductTypeDal>();
-            builder.RegisterType<ShopCartItemDal>().As<IShopCartItemDal>();
-            builder.RegisterType<PictureDal>().As<IPictureDal>();
-            builder.RegisterType<ProductPictureDal>().As<IProductPictureDal>();
+
             builder.RegisterType<WebContentDal>().As<IWebContentDal>();
             builder.RegisterType<WebContentTypeDal>().As<IWebContentTypeDal>();
         }

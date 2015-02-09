@@ -31,13 +31,13 @@ namespace SchoolSite.Web.DAL
 
         public override void OnNotify(dynamic entity)
         {
-            if (entity is Picture)
-                HandlePicture(entity as Picture);
+            //if (entity is Picture)
+            //    HandlePicture(entity as Picture);
         }
 
-        public void HandlePicture(Picture picture)
-        {
-            ImageManage.GenerateThumbnail(picture);
-        }
+        //public void HandlePicture(Picture picture)
+        //{
+        //    ImageManage.GenerateThumbnail(picture);
+        //}
     }
 }
