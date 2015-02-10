@@ -10,8 +10,10 @@
         <div id="content">
             <div>
                 <h1>@Html.DisplayFor(model => model.Title)</h1>
-
-                <div class="row">
+                <div>
+                    <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@Model.ImageForTitle" />
+                </div>
+                    <div class="row">
                     <div class="col-md-6">
                         <div class="pull-left">
                             最后修改者：<a href="#">@Html.DisplayFor(model => model.LastModifier)</a>

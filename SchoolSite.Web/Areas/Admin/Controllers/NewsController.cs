@@ -40,10 +40,11 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                                   || s.Title.Contains(searchString)
-                                                   || s.Creater.Contains(searchString)
-                                                   || s.LastModifier.Contains(searchString));
+                    entityList = entityList.Where(s => (s.Content != null && s.Content.Contains(searchString))
+                                                                        || (s.Title != null && s.Title.Contains(searchString))
+                                                                        || (s.Creater != null && s.Creater.Contains(searchString))
+                                                                        || (s.LastModifier != null && s.LastModifier.Contains(searchString)));
+
                 }
                 entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
@@ -80,14 +81,13 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public async Task<ActionResult> Create(News news)
         {
-            if (ModelState.IsValid)
-            {
-                InitInsert(news);
-                await _newsDal.InsertAsync(news);
-                return RedirectToAction("Index");
-            }
+
+            InitInsert(news);
+            await _newsDal.InsertAsync(news);
+            return RedirectToAction("Index");
+
             return View(news);
         }
 
@@ -112,15 +112,11 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Content,IsPublish,NewsType,NewsTypeList,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] News news)
+        public async Task<ActionResult> Edit(News news)
         {
-            if (ModelState.IsValid)
-            {
-                news.LastModifier = User.Identity.Name;
-                await _newsDal.ModifyAsync(news);
-                return RedirectToAction("Index");
-            }
-            return View(news);
+            InitModify(news);
+            await _newsDal.ModifyAsync(news);
+            return RedirectToAction("Index");
         }
 
         // GET: /News/Delete/5
@@ -151,7 +147,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
+
             }
             base.Dispose(disposing);
         }

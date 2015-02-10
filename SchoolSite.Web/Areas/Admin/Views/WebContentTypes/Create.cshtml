@@ -10,7 +10,17 @@
 {
     <div class="form-horizontal">
         <hr />
-       
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuType.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MenuTypeId, Model.MenuTypeList.Select(t => new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                }))
+                @Html.ValidationMessageFor(model => model.MenuTypeId)
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

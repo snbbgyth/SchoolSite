@@ -20,9 +20,14 @@
 
 @foreach (var item in Model)
 {
+    string imageForTitle = item.ImageForTitle;
+    if (string.IsNullOrEmpty(item.ImageForTitle))
+    {
+        imageForTitle = "新闻/defaultpic.gif";
+    }
     <div>
         <h2>
-            @Html.ActionLink(@item.Title, "Details", new { id = item.Id })
+            <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@imageForTitle" /> @Html.ActionLink(@item.Title, "Details", new { id = item.Id })
         </h2>
         <div class="col-md-6">
             <div class="pull-left">

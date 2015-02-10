@@ -59,9 +59,9 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    entityList = entityList.Where(s => s.UserName.Contains(searchString)
-                                                   || s.Email.Contains(searchString)
-                                                   || s.PhoneNumber.Contains(searchString));
+                    entityList = entityList.Where(s => (s.UserName != null && s.UserName.Contains(searchString))
+                                                    || (s.Email != null && s.Email.Contains(searchString))
+                                                    || (s.PhoneNumber != null && s.PhoneNumber.Contains(searchString)));
                 }
                 switch (sortOrder)
                 {

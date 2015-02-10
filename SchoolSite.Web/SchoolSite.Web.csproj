@@ -210,6 +210,7 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsTypesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesAdminController.cs" />
@@ -289,13 +290,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Home\1.png" />
-    <Content Include="Images\Product\Web\1.jpg" />
-    <Content Include="Images\Product\Web\2.jpg" />
-    <Content Include="Images\Product\Web\3.jpg" />
-    <Content Include="Images\Product\Web\4.jpg" />
-    <Content Include="Images\Product\Web\5.jpg" />
-    <Content Include="Images\Product\Web\6.jpg" />
-    <Content Include="Images\Product\Web\7.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -357,8 +351,14 @@
     <Content Include="Areas\Admin\Views\WebContentTypes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\WebContentTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Images\学校概况\赣州中学交通图\1-111014013UM29.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\MenuTypes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuTypes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuTypes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuTypes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MenuTypes\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -870,6 +870,7 @@
     <Content Include="Views\SchoolInfo\SchoolLeaderDetail.cshtml" />
     <Content Include="Views\SchoolInfo\SchoolScenery.cshtml" />
     <Content Include="Views\SchoolInfo\SchoolSceneryDetail.cshtml" />
+    <Content Include="Views\SchoolInfo\ElectronicMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

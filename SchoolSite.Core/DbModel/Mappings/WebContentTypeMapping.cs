@@ -13,6 +13,7 @@ namespace SchoolSite.Core.DbModel.Mappings
            Map(x => x.LastModifier);
            Map(x => x.LastModifyDate);
            Map(x => x.Name);
+           Map(x => x.MenuTypeId);
        }
     }
 }

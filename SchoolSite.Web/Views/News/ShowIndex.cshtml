@@ -14,24 +14,31 @@
 
 @foreach (var item in Model)
 {
-    <div>
-        <h2>
-            <a href="/News/Details/@item.Id">@item.Title</a>
-        </h2>
-        <div class="col-md-6">
-            <div class="pull-left">
-                来源：<a href="#">@item.Creater</a>
+    {
+        string imageForTitle = item.ImageForTitle;
+        if (string.IsNullOrEmpty(item.ImageForTitle))
+        {
+              imageForTitle = "新闻/defaultpic.gif";
+        }
+        <div>
+            <h2>
+                <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@imageForTitle" />  <a href="/News/Details/@item.Id">@item.Title</a>
+            </h2>
+            <div class="col-md-6">
+                <div class="pull-left">
+                    来源：<a href="#">@item.Creater</a>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="pull-right">
-                最后修改时间 @item.LastModifyDate
+            <div class="col-md-6">
+                <div class="pull-right">
+                    最后修改时间 @item.LastModifyDate
+                </div>
             </div>
+
+            <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+
         </div>
-
-        <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
-
-    </div>
+    };
 }
 
 <br />

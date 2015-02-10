@@ -18,6 +18,7 @@ namespace SchoolSite.Core.BLL
             builder.RegisterType<CommentDal>().As<ICommentDal>();
             builder.RegisterType<WebContentDal>().As<IWebContentDal>();
             builder.RegisterType<WebContentTypeDal>().As<IWebContentTypeDal>();
+            builder.RegisterType<MenuTypeDal>().As<IMenuTypeDal>();
         }
     }
 }

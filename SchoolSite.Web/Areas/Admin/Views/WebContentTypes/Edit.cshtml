@@ -15,7 +15,19 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-
+        @Html.HiddenFor(model => model.CreateDate)
+        @Html.HiddenFor(model => model.Creater)
+        <div class="form-group">
+            @Html.LabelFor(model => model.MenuType.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.MenuTypeId, Model.MenuTypeList.Select(t => new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString()
+                }))
+                @Html.ValidationMessageFor(model => model.MenuTypeId)
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

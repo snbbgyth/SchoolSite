@@ -1,6 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using PagedList;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
 using SchoolSite.Web.DAL;
@@ -13,16 +17,57 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
     {
 
         private IWebContentTypeDal _webContentTypeDal;
+        private IMenuTypeDal _menuTypeDal;
 
         public WebContentTypesController()
         {
             _webContentTypeDal = DependencyResolver.Current.GetService<IWebContentTypeDal>();
+            _menuTypeDal = DependencyResolver.Current.GetService<IMenuTypeDal>();
         }
 
         // GET: Admin/WebContentTypes
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index( string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(await _webContentTypeDal.QueryAllAsync());
+
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var entityList = await _webContentTypeDal.QueryAllAsync();
+            foreach (var entity in entityList)
+            {
+                entity.MenuType = await _menuTypeDal.QueryByIdAsync(entity.MenuTypeId);
+            }
+            if (entityList.Any())
+            {
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    entityList = entityList.Where(s => s.Name != null && s.Name.Contains(searchString));
+                }
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        entityList = entityList.OrderByDescending(s => s.Name);
+                        break;
+                    default: // Name ascending 
+                        entityList = entityList.OrderBy(s => s.Name);
+                        break;
+                }
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(entityList.ToPagedList(pageNumber, pageSize));
+
         }
 
         // GET: Admin/WebContentTypes/Details/5
@@ -37,13 +82,16 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
             return View(webContentType);
         }
 
         // GET: Admin/WebContentTypes/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+             var webContentType=new WebContentType();
+            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
+            return View(webContentType);
         }
 
         // POST: Admin/WebContentTypes/Create
@@ -58,6 +106,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
                 await _webContentTypeDal.InsertAsync(webContentType);
                 return RedirectToAction("Index");
             }
+            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -73,6 +122,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -81,14 +132,16 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,CreateDate,LastModifyDate,IsDelete,Creater,LastModifier")] WebContentType webContentType)
+        public async Task<ActionResult> Edit( WebContentType webContentType)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(webContentType.Name))
             {
                 InitModify(webContentType);
                 await _webContentTypeDal.ModifyAsync(webContentType);
                 return RedirectToAction("Index");
             }
+            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -104,6 +157,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
             return View(webContentType);
         }
 
@@ -112,7 +166,6 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _webContentTypeDal.DeleteByIdAsync(id);
             return RedirectToAction("Index");
         }
@@ -121,7 +174,6 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         {
             if (disposing)
             {
-
             }
             base.Dispose(disposing);
         }

@@ -37,7 +37,7 @@ namespace SchoolSite.Web.Controllers
             if (!webContentList.Any()) return View(new WebContent());
             ViewBag.Title = "学校简介";
             return View(webContentList.First(t => t.DisplayOrder == webContentList.Max(c => c.DisplayOrder)));
-     
+
         }
 
         public async Task<ActionResult> SchoolLeader(string currentFilter, string searchString, int? page)
@@ -53,17 +53,17 @@ namespace SchoolSite.Web.Controllers
             IEnumerable<WebContent> entityList = new List<WebContent>();
             ViewBag.CurrentFilter = searchString;
             var webContentType = await _webContentTypeDal.FirstOrDefaultAsync(t => t.Name == "学校领导");
-            if (webContentType != null)  
-              entityList = await _webContentDal.QueryByFunAsync(t => t.WebContentTypeId == webContentType.Id);
-     
+            if (webContentType != null)
+                entityList = await _webContentDal.QueryByFunAsync(t => t.WebContentTypeId == webContentType.Id);
+
             if (entityList.Any())
             {
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                                       || s.Title.Contains(searchString)
-                                                       || s.Creater.Contains(searchString)
-                                                       || s.LastModifier.Contains(searchString));
+                    entityList = entityList.Where(s => (s.Content != null && s.Content.Contains(searchString))
+                                                       || (s.Title != null && s.Title.Contains(searchString))
+                                                       || (s.Creater != null && s.Creater.Contains(searchString))
+                                                       || (s.LastModifier != null && s.LastModifier.Contains(searchString)));
                 }
                 entityList = entityList.OrderBy(s => s.DisplayOrder);
             }
@@ -95,25 +95,27 @@ namespace SchoolSite.Web.Controllers
             ViewBag.CurrentFilter = searchString;
             IEnumerable<WebContent> entityList = new List<WebContent>();
             var webContentType = await _webContentTypeDal.FirstOrDefaultAsync(t => t.Name == "校园风光");
-            if (webContentType != null) 
-              entityList = await _webContentDal.QueryByFunAsync(t => t.WebContentTypeId == webContentType.Id);
+            if (webContentType != null)
+                entityList = await _webContentDal.QueryByFunAsync(t => t.WebContentTypeId == webContentType.Id);
 
             if (entityList.Any())
             {
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    entityList = entityList.Where(s => s.Content.Contains(searchString)
-                                                       || s.Title.Contains(searchString)
-                                                       || s.Creater.Contains(searchString)
-                                                       || s.LastModifier.Contains(searchString));
+                    entityList = entityList.Where(s => (s.Content != null && s.Content.Contains(searchString))
+                                                       || (s.Title != null && s.Title.Contains(searchString))
+                                                       || (s.Creater != null && s.Creater.Contains(searchString))
+                                                       || (s.LastModifier != null && s.LastModifier.Contains(searchString)));
+                    
                 }
                 entityList = entityList.OrderBy(s => s.DisplayOrder);
             }
+            if (entityList == null || !entityList.Any()) entityList = new List<WebContent>();
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             ViewBag.Title = "校园风光";
             return View(entityList.ToPagedList(pageNumber, pageSize));
- 
+
         }
 
         public async Task<ActionResult> SchoolSceneryDetail(int id)
@@ -121,6 +123,13 @@ namespace SchoolSite.Web.Controllers
             var webContent = await _webContentDal.QueryByIdAsync(id);
             webContent.WebContentType = await _webContentTypeDal.QueryByIdAsync(webContent.WebContentTypeId);
             return View(webContent);
+        }
+
+
+        public ActionResult ElectronicMap()
+        {
+            ViewBag.Title = "赣州中学交通图";
+            return View();
         }
     }
 }

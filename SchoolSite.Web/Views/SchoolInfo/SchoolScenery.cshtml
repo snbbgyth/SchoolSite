@@ -3,31 +3,35 @@
 @using SchoolSite.Web.Help
 
 <h2>@ViewBag.Title</h2>
-@using (Html.BeginForm("SchoolIntroduction", "SchoolInfo", FormMethod.Get))
+@using (Html.BeginForm("SchoolScenery", "SchoolInfo", FormMethod.Get))
 {
     <p>
         输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />
     </p>
 }
+<div width="auto" class="product-grid">
 
-@foreach (var item in Model)
-{
-    <div>
-        <div>
-            <img width="150" height="140" alt="" src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" />
-        </div>
-        <div>
-            <a href="/SchoolInfo/SchoolSceneryDetail/@item.Id">@item.Title</a>
+    @foreach (var item in Model)
+    {
 
+        <div width="150" class="item-box">
+            <div width="150">
+                <img width="150" height="140" alt="" src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" />
+            </div>
+            <div width="150">
+                <a width="150" style="float:left" href="/SchoolInfo/SchoolSceneryDetail/@item.Id">@item.Title</a>
+            </div>
         </div>
-    </div>
-}
+
+    }
+
+</div>
 
 <br />
 页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("SchoolIntroduction",
+@Html.PagedListPager(Model, page => Url.Action("SchoolScenery",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 

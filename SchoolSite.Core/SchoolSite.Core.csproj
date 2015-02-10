@@ -89,6 +89,7 @@
     <Compile Include="DAL\CommentDal.cs" />
     <Compile Include="DAL\DataOperationActivityBase.cs" />
     <Compile Include="DAL\FluentNHibernateDal.cs" />
+    <Compile Include="DAL\MenuTypeDal.cs" />
     <Compile Include="DAL\NewsDal.cs" />
     <Compile Include="DAL\NewsTypeDal.cs" />
     <Compile Include="DAL\OtherLogInfoDal.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="DAL\WebContentTypeDal.cs" />
     <Compile Include="DbModel\Comment.cs" />
     <Compile Include="DbModel\Mappings\CommentMapping.cs" />
+    <Compile Include="DbModel\Mappings\MenuTypeMapping.cs" />
     <Compile Include="DbModel\Mappings\NewsMapping.cs" />
     <Compile Include="DbModel\Mappings\NewsTypeMapping.cs" />
     <Compile Include="DbModel\Mappings\OtherlogInfoMapping.cs" />
@@ -113,11 +115,13 @@
     <Compile Include="IDAL\ICommentDal.cs" />
     <Compile Include="IDAL\IDataOperationActivity.cs" />
     <Compile Include="IDAL\IFluentNHibernate.cs" />
+    <Compile Include="IDAL\IMenuTypeDal.cs" />
     <Compile Include="IDAL\INewsDal.cs" />
     <Compile Include="IDAL\INewsTypeDal.cs" />
     <Compile Include="IDAL\IOtherLogInfo.cs" />
     <Compile Include="IDAL\IWebContentDal.cs" />
     <Compile Include="IDAL\IWebContentTypeDal.cs" />
+    <Compile Include="DbModel\MenuType.cs" />
     <Compile Include="Model\BaseTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueDAL\LogInfoQueue.cs" />

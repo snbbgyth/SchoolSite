@@ -1,6 +1,7 @@
 ﻿
 @using SchoolSite.Web.Help
-@model IEnumerable<SchoolSite.Core.DbModel.WebContent>
+@model PagedList.IPagedList<SchoolSite.Core.DbModel.WebContent>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "列表";
@@ -11,20 +12,26 @@
 <p>
     @Html.ActionLink("新建", "Create")
 </p>
+@using (Html.BeginForm("Index", "WebContents", FormMethod.Get))
+{
+    <p>
+        @Html.DropDownList("menuTypeId" as string, ViewBag.MenuTypes as IEnumerable<SelectListItem>)   输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+</p>
+}
 <table class="table">
     <tr>
         <th>
             类型名称
-            @*@Html.DisplayNameFor(model => model.WebContentType.Name)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Content)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DisplayOrder)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().DisplayOrder)
         </th>
         <th></th>
     </tr>
@@ -51,3 +58,8 @@
     </tr>
 }
 </table>
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new {menuTypeId="menuTypeId", page,  currentFilter = ViewBag.CurrentFilter }))

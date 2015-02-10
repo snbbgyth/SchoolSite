@@ -36,5 +36,7 @@ namespace SchoolSite.Web.Areas.Admin.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<SchoolSite.Core.DbModel.MenuType> MenuTypes { get; set; }
+
     }
 }
