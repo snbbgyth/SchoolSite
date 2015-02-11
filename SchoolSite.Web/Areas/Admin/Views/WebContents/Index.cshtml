@@ -15,7 +15,8 @@
 @using (Html.BeginForm("Index", "WebContents", FormMethod.Get))
 {
     <p>
-        @Html.DropDownList("menuTypeId" as string, ViewBag.MenuTypes as IEnumerable<SelectListItem>)   输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        菜单类型： @Html.DropDownList("menuTypeId" as string, ViewBag.MenuTypes as IEnumerable<SelectListItem>, new{onchange = @"form.submit();"})  
+        内容类型： @Html.DropDownList("webContentTypeId" as string, ViewBag.WebContentTypes as IEnumerable<SelectListItem>, new { onchange = @"form.submit();" })   输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
             <input type="submit" value="Search" />
 </p>
 }
@@ -62,4 +63,4 @@
 页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new {menuTypeId="menuTypeId", page,  currentFilter = ViewBag.CurrentFilter }))
+            new { menuTypeId = ViewBag.MenuTypeId,webContentTypeId=ViewBag.WebContentTypeId, page, currentFilter = ViewBag.CurrentFilter }))

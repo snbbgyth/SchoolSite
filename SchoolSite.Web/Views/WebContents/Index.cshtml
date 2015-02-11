@@ -1,0 +1,47 @@
+﻿@model PagedList.IPagedList<SchoolSite.Core.DbModel.WebContent>
+@using PagedList.Mvc;
+@using SchoolSite.Web.Help
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm("Index", "WebContents", new { webContentTypeId = ViewBag.WebContentTypeId, }, FormMethod.Get))
+{
+    <p>
+        输入查找内容: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@foreach (var item in Model)
+{
+    {
+        string imageForTitle = item.ImageForTitle;
+        if (string.IsNullOrEmpty(item.ImageForTitle))
+        {
+            imageForTitle = "新闻/defaultpic.gif";
+        }
+        <div>
+            <h2>
+                <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@imageForTitle" />  <a href="/WebContents/Details/@item.Id">@item.Title</a>
+            </h2>
+            <div class="col-md-6">
+                <div class="pull-left">
+                    来源：<a href="#">@item.Creater</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    最后修改时间 @item.LastModifyDate
+                </div>
+            </div>
+
+            <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+
+        </div>
+    };
+}
+
+<br />
+页数 @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) 总数 @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+            new { webContentTypeId = ViewBag.WebContentTypeId, page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

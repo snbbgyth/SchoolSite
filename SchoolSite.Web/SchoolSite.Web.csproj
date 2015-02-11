@@ -228,6 +228,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SchoolInfoController.cs" />
+    <Compile Include="Controllers\WebContentsController.cs" />
+    <Compile Include="DAL\Manage\WebContentManage.cs" />
     <Compile Include="DAL\Payment\AliPayPaymentProcessor.cs" />
     <Compile Include="DAL\BaseController.cs" />
     <Compile Include="DAL\Payment\ChinaPay.cs" />
@@ -871,6 +873,8 @@
     <Content Include="Views\SchoolInfo\SchoolScenery.cshtml" />
     <Content Include="Views\SchoolInfo\SchoolSceneryDetail.cshtml" />
     <Content Include="Views\SchoolInfo\ElectronicMap.cshtml" />
+    <Content Include="Views\WebContents\Details.cshtml" />
+    <Content Include="Views\WebContents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

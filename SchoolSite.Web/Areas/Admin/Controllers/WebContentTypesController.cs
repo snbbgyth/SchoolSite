@@ -8,6 +8,7 @@ using PagedList;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
 using SchoolSite.Web.DAL;
+using SchoolSite.Web.DAL.Manage;
 using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
@@ -43,10 +44,10 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var entityList = await _webContentTypeDal.QueryAllAsync();
+            var entityList = WebContentManage.QueryWebContentTypes();//await _webContentTypeDal.QueryAllAsync();
             foreach (var entity in entityList)
             {
-                entity.MenuType = await _menuTypeDal.QueryByIdAsync(entity.MenuTypeId);
+                entity.MenuType = WebContentManage.QueryMenuTypeById(entity.MenuTypeId);// await _menuTypeDal.QueryByIdAsync(entity.MenuTypeId);
             }
             if (entityList.Any())
             {
@@ -77,12 +78,12 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WebContentType webContentType = await _webContentTypeDal.QueryByIdAsync(id);
+            WebContentType webContentType = WebContentManage.QueryWebContentTypeById((int)id);// await _webContentTypeDal.QueryByIdAsync(id);
             if (webContentType == null)
             {
                 return HttpNotFound();
             }
-            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuType = WebContentManage.QueryMenuTypeById(webContentType.MenuTypeId);// await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
             return View(webContentType);
         }
 
@@ -90,7 +91,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Create()
         {
              var webContentType=new WebContentType();
-            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
+             webContentType.MenuTypeList = WebContentManage.QueryMenuTypes();// await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -104,9 +105,10 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 InitInsert(webContentType);
                 await _webContentTypeDal.InsertAsync(webContentType);
+                WebContentManage.RefreshWebContentTypes();
                 return RedirectToAction("Index");
             }
-            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
+            webContentType.MenuTypeList = WebContentManage.QueryMenuTypes();// await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -122,8 +124,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
-            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
+            webContentType.MenuType = WebContentManage.QueryMenuTypeById(webContentType.MenuTypeId);// await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuTypeList = WebContentManage.QueryMenuTypes();// await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -138,10 +140,11 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 InitModify(webContentType);
                 await _webContentTypeDal.ModifyAsync(webContentType);
+                WebContentManage.RefreshWebContentTypes();
                 return RedirectToAction("Index");
             }
-            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
-            webContentType.MenuTypeList = await _menuTypeDal.QueryAllAsync();
+            webContentType.MenuType = WebContentManage.QueryMenuTypeById(webContentType.MenuTypeId);// await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuTypeList = WebContentManage.QueryMenuTypes();// await _menuTypeDal.QueryAllAsync();
             return View(webContentType);
         }
 
@@ -157,7 +160,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            webContentType.MenuType = await _menuTypeDal.QueryByIdAsync(webContentType.MenuTypeId);
+            webContentType.MenuType = WebContentManage.QueryMenuTypeById(webContentType.MenuTypeId);
             return View(webContentType);
         }
 
@@ -167,6 +170,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             await _webContentTypeDal.DeleteByIdAsync(id);
+            WebContentManage.RefreshWebContentTypes();
             return RedirectToAction("Index");
         }
 

@@ -8,6 +8,7 @@ using PagedList;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
 using SchoolSite.Web.DAL;
+using SchoolSite.Web.DAL.Manage;
 using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
@@ -27,10 +28,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/WebContents
-        public async Task<ActionResult> Index(string menuTypeId, string currentFilter, string searchString, int? page)
+        public async Task<ActionResult> Index(string menuTypeId, string webContentTypeId, string currentFilter, string searchString, int? page)
         {
-
-
             if (searchString != null)
             {
                 page = 1;
@@ -39,26 +38,10 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
-
-            IEnumerable<WebContent> entityList;
-            if (menuTypeId == null || menuTypeId == "0")
-                entityList = await _webContentDal.QueryAllAsync();
-            else
-            {
-                int typeId = Convert.ToInt32(menuTypeId);
-                var webContentTypes =
-                    await _webContentTypeDal.QueryByFunAsync(t => t.MenuTypeId == typeId);
-                entityList =
-                    await _webContentDal.QueryByWebContentTypeIdsAsync(webContentTypes.Select(t => t.Id).ToList());
-
-            }
-            foreach (var entity in entityList)
-            {
-                entity.WebContentType = await _webContentTypeDal.QueryByIdAsync(entity.WebContentTypeId);
-            }
-
+            ViewBag.MenuTypeId = menuTypeId;
+            ViewBag.WebContentTypeId = webContentTypeId;
+            IEnumerable<WebContent> entityList =await WebContentManage.QueryByMenuTypeIdAndWebContentTypeId(menuTypeId,webContentTypeId);
             if (entityList.Any())
             {
                 if (!String.IsNullOrEmpty(searchString))
@@ -67,22 +50,14 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
                                                                           || (s.Title != null && s.Title.Contains(searchString))
                                                                           || (s.Creater != null && s.Creater.Contains(searchString))
                                                                           || (s.LastModifier != null && s.LastModifier.Contains(searchString)));
-
                 }
                 entityList = entityList.OrderByDescending(s => s.LastModifyDate);
             }
-
-            var menuTypeList = await _menuTypeDal.QueryAllAsync();
-            var selectListItemList = menuTypeList.Select(t => new SelectListItem { Text = t.Name, Value = t.Id.ToString() }).ToList();
-            selectListItemList.Insert(0, new SelectListItem { Text = "所有", Value = "0" });
-            ViewBag.MenuTypes = selectListItemList;
-            if (ViewData["Selected"] == null)
-                ViewData["Selected"] = "0";
-
+            ViewBag.MenuTypes = await  WebContentManage.QuerySelectListMenuTypes();
+            ViewBag.WebContentTypes = await WebContentManage.QuerySelectListWebContentTypesByMenuTypeId(menuTypeId);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(entityList.ToPagedList(pageNumber, pageSize));
-
         }
 
         // GET: Admin/WebContents/Details/5

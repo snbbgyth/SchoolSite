@@ -25,6 +25,8 @@ namespace SchoolSite.Web.DAL.Manage
             return _newsTypeList;
         }
 
+
+
         public static NewsType QueryNewsTypeById(int id)
         {
            return  _newsTypeDal.FirstOrDefault(t => t.Id == id);

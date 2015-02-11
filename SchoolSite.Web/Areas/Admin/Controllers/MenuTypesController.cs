@@ -10,12 +10,12 @@ using System.Web.Mvc;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
 using SchoolSite.Web.Areas.Admin.Models;
+using SchoolSite.Web.DAL.Manage;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
     public class MenuTypesController : Controller
     {
-        //private ApplicationDbContext db = new ApplicationDbContext();
 
         private IMenuTypeDal _menuTypeDal;
 
@@ -61,6 +61,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(menuType.Name))
             {
                 await _menuTypeDal.InsertAsync(menuType);
+                WebContentManage.RefreshMenuTypes();
                 return RedirectToAction("Index");
             }
             return View(menuType);
@@ -92,6 +93,7 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             {
 
                 await _menuTypeDal.ModifyAsync(menuType);
+                WebContentManage.RefreshMenuTypes();
                 return RedirectToAction("Index");
             }
             return View(menuType);
@@ -117,8 +119,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-
             await _menuTypeDal.DeleteByIdAsync(id);
+            WebContentManage.RefreshMenuTypes();
             return RedirectToAction("Index");
         }
 
