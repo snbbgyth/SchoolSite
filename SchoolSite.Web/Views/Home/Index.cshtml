@@ -1,12 +1,31 @@
-﻿@{
-    ViewBag.Title = "春天软件工作室";
+﻿@using Microsoft.Web.Helpers
+@using SchoolSite.Web.DAL.Manage
+@{
+    ViewBag.Title = "赣州中学";
 }
-
+@{
+    var sliderList =NewsManage.QueryHomeIndexSliderWrapper(5);
+}
+<script type="text/javascript">
+    var j = jQuery.noConflict();
+    j(document).ready(function () {
+        j('#nivo-slider').nivoSlider();
+    });
+</script>
 <div class="jumbotron">
-    <h1>欢迎来到春天软件工作室</h1>
-    <p class="lead">春天软件致力为企业和个人提供公司网站开发和建设服务和企业管理软件的开发和维护。</p>
+    <h1>欢迎来到赣州中学</h1>
+    <p class="lead">赣州中学</p>
     <p>
-        <img width="615" height="300" alt="" src="/Images/Home/1.png">
+        <div class="slider-wrapper theme-default">
+            <div id="nivo-slider" class="nivoSlider">
+                @foreach (var item in sliderList)
+                {
+                    <a href="/News/Details/@item.Id" target="_blank">
+                        <img src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" alt="" title=@item.Title />
+                    </a>
+                }
+            </div>
+        </div>
     </p>
     <p><a href="/Home/" class="btn btn-primary btn-lg">了解更多 &raquo;</a></p>
 </div>
@@ -30,3 +49,4 @@
         <p><a class="btn btn-default" href="/Home/SoftwareProductIntro">了解更多 &raquo;</a></p>
     </div>
 </div>
+

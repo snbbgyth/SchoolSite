@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using SchoolSite.Core.DbModel;
@@ -47,6 +48,13 @@ namespace SchoolSite.Web.DAL.Manage
         public static void NewTaskRefreshNewsType()
         {
             _newsTypeList = _newsTypeDal.QueryAll();
+        }
+
+        public static IEnumerable<News> QueryHomeIndexSliderWrapper(int count)
+        {
+            var entityList = _newsDal.QueryByFun(t => t.ImageForTitle != null);
+            entityList = entityList.OrderByDescending(t => t.CreateDate);
+            return entityList.Take(count);
         }
 
     }

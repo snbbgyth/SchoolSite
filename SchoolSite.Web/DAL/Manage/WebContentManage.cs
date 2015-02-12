@@ -141,5 +141,14 @@ namespace SchoolSite.Web.DAL.Manage
             }
             return entityList;
         }
+
+        public   static  IEnumerable<WebContent> QueryHomeIndexSliderWrapper(int count)
+        {
+            var entityList =   _webContentDal.QueryByFun(t=>t.ImageForTitle!=null);
+            entityList = entityList.OrderByDescending(t => t.CreateDate);
+            return entityList.Take(count);
+        }
+          
+
     }
 }
