@@ -26,7 +26,10 @@ namespace SchoolSite.Web.DAL.Manage
             return _newsTypeList;
         }
 
-
+        public static NewsType QueryNewsTypeByName(string typeName)
+        {
+            return _newsTypeDal.FirstOrDefault(t => t.Name == typeName);
+        }
 
         public static NewsType QueryNewsTypeById(int id)
         {
@@ -53,6 +56,13 @@ namespace SchoolSite.Web.DAL.Manage
         public static IEnumerable<News> QueryHomeIndexSliderWrapper(int count)
         {
             var entityList = _newsDal.QueryByFun(t => t.ImageForTitle != null);
+            entityList = entityList.OrderByDescending(t => t.CreateDate);
+            return entityList.Take(count);
+        }
+
+        public static IEnumerable<News> QueryHomeIndexNews(int count)
+        {
+            var entityList = _newsDal.QueryAll();
             entityList = entityList.OrderByDescending(t => t.CreateDate);
             return entityList.Take(count);
         }

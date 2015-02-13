@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+        <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary(100))</p>
         <div class="col-md-6">
             <div class="pull-left">
                 @Html.ActionLink("编辑", "Edit", new { id = item.Id })

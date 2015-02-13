@@ -4,9 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PagedList;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
+using SchoolSite.Web.Areas.Admin.Models;
+using SchoolSite.Web.DAL.Manage;
 using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
@@ -20,6 +23,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         {
             _commentDal = DependencyResolver.Current.GetService<ICommentDal>();
         }
+
+ 
 
         // GET: Comments
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -36,8 +41,8 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
                 searchString = currentFilter;
             }
             ViewBag.CurrentFilter = searchString;
-            IEnumerable<Comment> entityList = null;
-            if (User.IsInRole("Admin"))
+            IEnumerable<Comment> entityList = null; 
+            if (await UserRoleManage.IsUserIdInRole(User.Identity.GetUserId(),"Admin"))
                 entityList = await _commentDal.QueryAllAsync();
             else
                 entityList = await _commentDal.QueryByFunAsync(t => t.Creater == User.Identity.Name || t.LastModifier == User.Identity.Name);

@@ -9,8 +9,6 @@ namespace SchoolSite.Web.DAL.MySql
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            // register mysql code generator
-            //SetSqlGenerator("MySql.Data.MySqlClient",   new MySqlMigrationSqlGenerator());
             SetHistoryContextFactory("MySql.Data.MySqlClient", (conn, schema) => new MySqlHistoryContext(conn, schema));
         }
 

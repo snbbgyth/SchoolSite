@@ -46,7 +46,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.Raw(item.Content.StripTagsRegex().ToSummary())
+            @Html.Raw(item.Content.StripTagsRegex().ToSummary(100))
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DisplayOrder)

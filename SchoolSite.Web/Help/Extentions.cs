@@ -8,11 +8,11 @@ namespace SchoolSite.Web.Help
 {
     public static class Extentions
     {
-        public static string ToSummary(this string content)
+        public static string ToSummary(this string content,int count)
         {
-            if (string.IsNullOrEmpty( content) || content.Length < 50)
+            if (string.IsNullOrEmpty(content) || content.Length < count)
                 return content;
-            return content.Substring(0, 50) + ".........";
+            return content.Substring(0, count) + ".........";
         }
 
         public static string StripTagsRegex(this string source)

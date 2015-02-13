@@ -101,6 +101,7 @@ Supports Thumbs: true
 	position:relative;
 	background:url(../Images/Home/loading.gif) no-repeat 50% 50%;
     margin-bottom:10px;
+    width: 390px;
     
 }
 .theme-default .nivoSlider img {
@@ -164,7 +165,7 @@ Supports Thumbs: true
 }
 
 .theme-default .nivo-controlNav.nivo-thumbs-enabled {
-	width: 100%;
+	width: 390px;
 }
 .theme-default .nivo-controlNav.nivo-thumbs-enabled a {
 	width: auto;
@@ -184,3 +185,82 @@ Supports Thumbs: true
 
 
 
+/*
+Home Index
+*/
+.topnews {
+width: 720px;
+height: 87px;
+border: #BEBEBE solid 1px;
+background-color: #FFF;
+float: left;
+}
+
+.xwzx_icon {
+margin: 5px 0px 0px 5px;
+float: left;
+width: 74px;
+display: inline;
+
+}
+
+.xwzx_content {
+float: left;
+width: 616px;
+margin: 5px 0px 0px 18px;
+height: 120px;
+overflow: hidden;
+display: inline;
+}
+
+.topnews_title {
+text-align: center;
+font-size: 24px;
+color: red;
+text-align: center;
+letter-spacing: 2px;
+line-height: 150%;
+font-weight: bold;
+}
+
+.topnews_content {
+line-height: 150%;
+text-indent: 24px;
+}
+
+.hotnews {
+width: 303px;
+float: right;
+background-color: #FFF;
+}
+
+.hotnews_title {
+height: 32px;
+border-left: solid 1px #BEBEBE;
+border-bottom: solid 1px #BEBEBE;
+background-position: -212px 0px;
+}
+
+
+
+.hotnews_content {
+background-position: 0px -34px;
+margin-top: 10px;
+padding-top: 0px;
+width: 295px;
+overflow: hidden;
+}
+
+.newsblock1b {
+width: 720px;
+float: left;
+height: 290px;
+}
+
+.newsblock2c {
+width: 720px;
+border: solid 1px #BEBEBE;
+float: left;
+margin-top: 5px;
+background-color: #F8F8F8;
+}

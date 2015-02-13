@@ -240,6 +240,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SchoolInfoController.cs" />
     <Compile Include="Controllers\WebContentsController.cs" />
+    <Compile Include="DAL\Manage\UserManage.cs" />
     <Compile Include="DAL\Manage\WebContentManage.cs" />
     <Compile Include="DAL\Payment\AliPayPaymentProcessor.cs" />
     <Compile Include="DAL\BaseController.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Images\Home\arrows.png" />
     <Content Include="Images\Home\bullets.png" />
     <Content Include="Images\Home\loading.gif" />
+    <Content Include="Images\Home\xwzx.jpg" />
     <Content Include="Images\学校概况\赣州中学交通图\1-111014013UM29.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

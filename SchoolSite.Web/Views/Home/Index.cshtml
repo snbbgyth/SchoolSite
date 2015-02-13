@@ -1,10 +1,15 @@
 ﻿@using Microsoft.Web.Helpers
+@using SchoolSite.Core.DbModel
 @using SchoolSite.Web.DAL.Manage
+@using SchoolSite.Web.Help
 @{
     ViewBag.Title = "赣州中学";
 }
 @{
-    var sliderList =NewsManage.QueryHomeIndexSliderWrapper(5);
+    var sliderList = NewsManage.QueryHomeIndexSliderWrapper(5);
+    var recommendNew = sliderList.FirstOrDefault() ?? new News();
+    var newsType = NewsManage.QueryNewsTypeByName("学校新闻");
+    var newsList = NewsManage.QueryHomeIndexNews(10);
 }
 <script type="text/javascript">
     var j = jQuery.noConflict();
@@ -12,41 +17,46 @@
         j('#nivo-slider').nivoSlider();
     });
 </script>
-<div class="jumbotron">
-    <h1>欢迎来到赣州中学</h1>
-    <p class="lead">赣州中学</p>
-    <p>
-        <div class="slider-wrapper theme-default">
-            <div id="nivo-slider" class="nivoSlider">
-                @foreach (var item in sliderList)
-                {
-                    <a href="/News/Details/@item.Id" target="_blank">
-                        <img src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" alt="" title=@item.Title />
-                    </a>
-                }
+
+<div style=" margin-left: 0px;float: left;padding: 0;">
+
+    <div class="topnews">
+        <div class="xwzx_icon">
+            <img src="/images/Home/xwzx.jpg" alt="推荐新闻" width="74" height="78" border="0">
+        </div>
+        <div class="xwzx_content">
+            <div class="topnews_title">
+                <a title=@recommendNew.Title href="/News/Details/@recommendNew.Id">@recommendNew.Title</a>
+            </div>
+            <div class="topnews_content">
+                @Html.Raw(recommendNew.Content.StripTagsRegex().ToSummary(80))
             </div>
         </div>
-    </p>
-    <p><a href="/Home/" class="btn btn-primary btn-lg">了解更多 &raquo;</a></p>
+    </div>
+    <div class="newsblock2c">
+        <div class="newsblock1b">
+            <div width="390px" class="slider-wrapper theme-default">
+                <div width="390px" id="nivo-slider" class="nivoSlider">
+                    @foreach (var item in sliderList.Take(5))
+                    {
+                        <a href="/News/Details/@item.Id" target="_blank">
+                            <img src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" alt="" title=@item.Title />
+                        </a>
+                    }
+                </div>
+            </div>
+            <div width="303px" class="hotnews">
+                <ul class="hotnews_title">
+                    <li class="icon"><a href="/News/ShowIndex/@newsType.Id" style="color: red">学校新闻</a></li>
+                </ul>
+                <ul class="hotnews_content">
+                    @foreach (var item in newsList)
+                    {
+                        var title = item.Title.Length > 15 ? item.Title.Substring(0, 15) : item.Title;
+                        <li><span style=" float:right;">@item.CreateDate.ToString("MM-dd")</span><a href="/News/Details/@item.Id">@title</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>为中小企业提供</h2>
-        <p>
-            公司网站建设和维护，企业ERP软件定制开发和维护。
-        </p>
-        <p><a class="btn btn-default" href="/Home/WebSiteProductIntro">了解更多 &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>为社会有志青年</h2>
-        <p>提供计算机技术培训，主要有电脑基本技能培训和软件件开发培训等。</p>
-        <p><a class="btn btn-default" href="/Home/TrainProductIntro">了解更多 &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>为政府机关和事业机构提供</h2>
-        <p>定制化软件和网站的设计和开发，以用对产品使用人员的培训。</p>
-        <p><a class="btn btn-default" href="/Home/SoftwareProductIntro">了解更多 &raquo;</a></p>
-    </div>
-</div>
-

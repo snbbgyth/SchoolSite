@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary())</p>
+            <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary(100))</p>
 
         </div>
     };
