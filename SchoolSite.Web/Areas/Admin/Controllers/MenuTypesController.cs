@@ -14,6 +14,7 @@ using SchoolSite.Web.DAL.Manage;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
+ [Authorize(Roles = "Admin")]
     public class MenuTypesController : Controller
     {
 

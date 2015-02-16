@@ -49,7 +49,7 @@ namespace SchoolSite.Web.DAL.Manage
 
         public static MenuType QueryMenuTypeById(int id)
         {
-            return _menuTypeList.FirstOrDefault(t=>t.Id==id);
+            return _menuTypeList.FirstOrDefault(t => t.Id == id);
         }
 
         public static WebContentType QueryWebContentTypeById(int id)
@@ -57,10 +57,16 @@ namespace SchoolSite.Web.DAL.Manage
             return _webContentTypeList.FirstOrDefault(t => t.Id == id);
         }
 
+        public static WebContentType QueryWebContentTypeByName(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return null;
+            return _webContentTypeList.FirstOrDefault(t => t.Name == name);
+        }
+
         private static void InitWebContentTypes()
         {
             _webContentTypeList = _webContentTypeDal.QueryAll().ToList();
-          
+
         }
 
         private static void InitMenuTypes()
@@ -137,18 +143,21 @@ namespace SchoolSite.Web.DAL.Manage
             foreach (var entity in entityList)
             {
                 entity.WebContentType = _webContentTypeList.Find(t => t.Id == entity.WebContentTypeId);
-                    //await _webContentTypeDal.QueryByIdAsync(entity.WebContentTypeId);
+                //await _webContentTypeDal.QueryByIdAsync(entity.WebContentTypeId);
             }
             return entityList;
         }
 
-        public   static  IEnumerable<WebContent> QueryHomeIndexSliderWrapper(int count)
+        public static IEnumerable<WebContent> QueryByWebContentTypeNameAndCount(string webContentTypeName, int count)
         {
-            var entityList =   _webContentDal.QueryByFun(t=>t.ImageForTitle!=null);
+            var webContentType = _webContentTypeList.FirstOrDefault(t => t.Name == webContentTypeName);
+            if (webContentType == null) return new List<WebContent>();
+            var entityList = _webContentDal.QueryByFun(t => t.WebContentTypeId == webContentType.Id);
             entityList = entityList.OrderByDescending(t => t.CreateDate);
+            if (entityList.Count() < count) return entityList;
             return entityList.Take(count);
         }
-          
 
+ 
     }
 }

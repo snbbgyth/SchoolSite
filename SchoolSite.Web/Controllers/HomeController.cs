@@ -40,7 +40,6 @@ namespace SchoolSite.Web.Controllers
 
         public ActionResult SoftwareProductIntro()
         {
-  
             ViewBag.Title = "企业简介.";
             return View();
         }

@@ -14,7 +14,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [MyAuthorize]
+    [Authorize]
     public class CommentsController : Controller
     {
         private ICommentDal _commentDal;
@@ -23,8 +23,6 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         {
             _commentDal = DependencyResolver.Current.GetService<ICommentDal>();
         }
-
- 
 
         // GET: Comments
         public async Task<ActionResult> Index(string sortOrder, string currentFilter, string searchString, int? page)

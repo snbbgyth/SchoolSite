@@ -257,6 +257,8 @@
     <Compile Include="Help\Extentions.cs" />
     <Compile Include="Help\NullJsonResult.cs" />
     <Compile Include="DAL\MySql\MySqlInitializer.cs" />
+    <Compile Include="Help\UtilHelper.cs" />
+    <Compile Include="Models\WebContentTypeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -366,6 +368,7 @@
     <Content Include="Areas\Admin\Views\WebContentTypes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Images\Home\arrows.png" />
+    <Content Include="Images\Home\b3.jpg" />
     <Content Include="Images\Home\bullets.png" />
     <Content Include="Images\Home\loading.gif" />
     <Content Include="Images\Home\xwzx.jpg" />
@@ -894,12 +897,13 @@
     <Content Include="Views\SchoolInfo\ElectronicMap.cshtml" />
     <Content Include="Views\WebContents\Details.cshtml" />
     <Content Include="Views\WebContents\Index.cshtml" />
+    <Content Include="Views\Home\_TopContents.cshtml" />
+    <Content Include="Views\Home\_TopHonor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\SaveUpload\Product\Thumbnails\" />
     <Folder Include="Images\SaveUpload\Uploaded\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\tinymce\plugins\Roxy_Fileman\tmp\" />
     <Folder Include="Scripts\tinymce\plugins\Roxy_Fileman\Uploads\Documents\" />
     <Folder Include="Scripts\tinymce\plugins\Roxy_Fileman\Uploads\FLV\" />

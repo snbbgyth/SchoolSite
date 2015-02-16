@@ -64,6 +64,7 @@ namespace SchoolSite.Web.DAL.Manage
         {
             var entityList = _newsDal.QueryAll();
             entityList = entityList.OrderByDescending(t => t.CreateDate);
+            if (entityList.Count() < count) return entityList;
             return entityList.Take(count);
         }
 

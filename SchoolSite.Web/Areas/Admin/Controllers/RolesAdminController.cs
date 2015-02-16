@@ -12,7 +12,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [MyAuthorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()

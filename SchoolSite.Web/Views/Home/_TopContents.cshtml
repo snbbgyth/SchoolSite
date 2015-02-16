@@ -1,0 +1,53 @@
+﻿@using SchoolSite.Core.DbModel
+@using SchoolSite.Web.DAL.Manage
+@model SchoolSite.Web.Models.WebContentTypeViewModel
+
+@{
+    IEnumerable<WebContent> firstList = new List<WebContent>();
+    IEnumerable<WebContent> secondList = new List<WebContent>();
+    var firstType = WebContentManage.QueryWebContentTypeByName(Model.FirstType);
+    var secondType = WebContentManage.QueryWebContentTypeByName(Model.SecondType);
+    if (!string.IsNullOrEmpty(Model.FirstType))
+    {
+        firstList = WebContentManage.QueryByWebContentTypeNameAndCount(Model.FirstType, 10);
+    }
+    if (!string.IsNullOrEmpty(Model.SecondType))
+    {
+        secondList = WebContentManage.QueryByWebContentTypeNameAndCount(Model.SecondType, 10);
+    }
+}
+<div class="newsblock">
+    <ul class="news_title">
+        <li id="one1"   >@Html.ActionLink(firstType.Name, "Index", "WebContents", new { webContentTypeId = firstType.Id }, string.Empty)</li>
+        @{
+            if(!string.IsNullOrEmpty(Model.SecondType))
+            { 
+                <li id="one2"  >@Html.ActionLink(secondType.Name, "Index", "WebContents", new { webContentTypeId = secondType.Id }, string.Empty)</li>
+            }
+        }
+    </ul>
+    <ul id="con_one_1" style="display: block;">
+        <ul class="news_content">
+            @foreach (var entity in firstList)
+            {
+                var title = entity.Title.Length > 15 ? entity.Title.Substring(0, 15) : entity.Title;
+                <li><span style=" float:right;">@entity.CreateDate.ToString("MM-dd")</span><a href="/WebContents/Details/@entity.Id">@title</a></li>
+            }
+        </ul>
+    </ul>
+    @{
+        if (!string.IsNullOrEmpty(Model.SecondType))
+        {
+            <ul id="con_one_2" class="news_content" style="display: none;">
+                <ul class="news_content">
+                    @foreach (var entity in secondList)
+                    {
+                        var title = entity.Title.Length > 15 ? entity.Title.Substring(0, 15) : entity.Title;
+                        <li><span style=" float:right;">@entity.CreateDate.ToString("MM-dd")</span><a href="/WebContents/Details/@entity.Id">@title</a></li>
+                    }
+                </ul>
+            </ul>
+        }
+    }
+   
+</div>

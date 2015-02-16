@@ -17,7 +17,6 @@ namespace SchoolSite.Web.Controllers
 {
     public class WebContentsController : Controller
     {
- 
         private IWebContentDal _webContentDal;
         private IWebContentTypeDal _webContentTypeDal;
 
@@ -40,8 +39,6 @@ namespace SchoolSite.Web.Controllers
             IEnumerable<WebContent> entityList = new List<WebContent>();
             ViewBag.CurrentFilter = searchString;
             ViewBag.WebContentTypeId = webContentTypeId;
-            //var webContentType = await _webContentTypeDal.FirstOrDefaultAsync(t => t.Name == "学校领导");
-            //if (webContentType != null)
             entityList = await _webContentDal.QueryByFunAsync(t => t.WebContentTypeId == webContentTypeId);
             if (entityList.Any())
             {

@@ -1,0 +1,115 @@
+﻿@using SchoolSite.Web.DAL.Manage
+@using SchoolSite.Web.Help
+
+@{
+    var schoolList =WebContentManage.QueryByWebContentTypeNameAndCount("学校荣誉",4);
+    var teacherList = WebContentManage.QueryByWebContentTypeNameAndCount("教师荣誉", 4);
+    var studentList = WebContentManage.QueryByWebContentTypeNameAndCount("学生荣誉", 4);
+    var top2SchoolHonor = schoolList.Count() > 2 ? schoolList.Take(2) : schoolList;
+}
+
+<div class="newsblock1b" style="border-bottom:solid 1px #BEBEBE;">
+    <div class="index_main4">
+        <div class="index_main4box">
+            <ul>
+                @foreach (var item in top2SchoolHonor)
+                {
+                    var title = item.Title.Length > 13 ? item.Title.Substring(0, 13) : item.Title;
+                    <li>
+                        <a title=@title href="WebContents/Details/@item.Id"><img width="164" height="100" alt=@title src="/Images/SaveUpload/Uploaded/@item.ImageForTitle.GetImageForTitle()"></a>
+                        <div class="title"><a title=@title href="/Details/@item.Id">@title</a></div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="hotnews1">
+        <ul class="hotnews1_title ">
+            <li class="hotnews1_title"><a href="#">荣誉殿堂</a></li>
+        </ul>
+
+        <div style=" border-bottom:solid 1px #BEBEBE;">
+            <img src="/Images/Home/b3.jpg" width="33" height="258" style="float: left;border-left:solid 1px #BEBEBE;border-right:solid 1px #BEBEBE;" usemap="#Map1">
+            <map name="Map1" id="Map1">
+                <area shape="rect" coords="0,0,33,80" href="/WebContents/Details/@WebContentManage.QueryWebContentTypesByMenuName("学校荣誉")">
+                <area shape="rect" coords="0,88,33,160" href="/WebContents/Details/@WebContentManage.QueryWebContentTypesByMenuName("教师荣誉")">
+                <area shape="rect" coords="0,177,33,240" href="/WebContents/Details/@WebContentManage.QueryWebContentTypesByMenuName("学生荣誉")">
+            </map>
+
+            <div style="float: left;margin-bottom: 0px;">
+                <ul class="hotnews1_content">
+                    @{
+                        var firstSchool = schoolList.FirstOrDefault();
+                        if (firstSchool != null)
+                        {
+                            <li>
+                                <a href="WebContents/Details/@firstSchool.Id">@firstSchool.Title</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="bignews">
+                <div class="d1">
+                    @foreach (var item in schoolList)
+                    {
+                        <div class="d1arc">
+                            <a href="WebContents/Details/@item.Id">@item.Title</a>
+                        </div>
+                    }
+                     
+                </div>
+
+            </div>
+        </div>
+
+        <div style="float: left;margin-bottom: 0px;">
+            <ul class="hotnews1_content">
+                @{
+                    var firstTeacher = teacherList.FirstOrDefault();
+                    if (firstTeacher != null)
+                    {
+                        <li>
+                            <a href="WebContents/Details/@firstTeacher.Id">@firstTeacher.Title</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="bignews">
+            <div class="d1">
+                @foreach (var item in teacherList)
+                {
+                    <div class="d1arc">
+                        <a href="WebContents/Details/@item.Id">@item.Title</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+        <div style="float: left;margin-bottom: 0px;">
+            <ul class="hotnews1_content">
+                @{
+                    var firstStudent = studentList.FirstOrDefault();
+                    if (firstStudent != null)
+                    {
+                        <li>
+                            <a href="WebContents/Details/@firstStudent.Id">@firstStudent.Title</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div class="bignews">
+            <div class="d1">
+                @foreach (var item in studentList)
+                {
+                    <div class="d1arc">
+                        <a href="WebContents/Details/@item.Id">@item.Title</a>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

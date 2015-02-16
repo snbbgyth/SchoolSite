@@ -13,15 +13,15 @@
 
 @foreach (var item in Model)
 {
-    {
-        string imageForTitle = item.ImageForTitle;
-        if (string.IsNullOrEmpty(item.ImageForTitle))
-        {
-            imageForTitle = "新闻/defaultpic.gif";
-        }
+    //{
+        //string imageForTitle = item.ImageForTitle;
+        //if (string.IsNullOrEmpty(item.ImageForTitle))
+        //{
+        //    imageForTitle = "新闻/defaultpic.gif";
+        //}
         <div>
             <h2>
-                <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@imageForTitle" />  <a href="/WebContents/Details/@item.Id">@item.Title</a>
+                <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@item.ImageForTitle.GetImageForTitle()" />  <a href="/WebContents/Details/@item.Id">@item.Title</a>
             </h2>
             <div class="col-md-6">
                 <div class="pull-left">
@@ -37,7 +37,7 @@
             <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary(100))</p>
 
         </div>
-    };
+    @*};*@
 }
 
 <br />

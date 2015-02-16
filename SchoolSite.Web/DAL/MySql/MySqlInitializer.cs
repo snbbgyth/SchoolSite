@@ -22,7 +22,6 @@ namespace SchoolSite.Web.DAL.MySql
                     string.Format(
                       "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = '{0}' AND table_name = '__MigrationHistory'",
                       "SchoolSite"));
-
                     if (migrationHistoryTableExists.FirstOrDefault() == 0)
                     {
                         context.Database.CreateIfNotExists();

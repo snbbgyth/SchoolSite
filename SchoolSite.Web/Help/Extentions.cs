@@ -85,5 +85,14 @@ namespace SchoolSite.Web.Help
             return new Random(BitConverter.ToInt32(randomNumberBuffer, 0)).Next(min, max);
         }
 
+        public static string GetImageForTitle(this string imageForTitle)
+        {
+            if (string.IsNullOrEmpty(imageForTitle))
+            {
+                imageForTitle = "新闻/defaultpic.gif";
+            }
+            return imageForTitle;
+        }
+
     }
 }

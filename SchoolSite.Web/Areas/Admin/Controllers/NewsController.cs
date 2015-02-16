@@ -12,7 +12,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [MyAuthorize(Roles = "Admin,Edit")]
+    [Authorize(Roles = "Admin,Edit")]
     public class NewsController : BaseController
     {
         private INewsDal _newsDal;

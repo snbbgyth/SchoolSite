@@ -2,6 +2,7 @@
 @using SchoolSite.Core.DbModel
 @using SchoolSite.Web.DAL.Manage
 @using SchoolSite.Web.Help
+@using SchoolSite.Web.Models
 @{
     ViewBag.Title = "赣州中学";
 }
@@ -18,8 +19,7 @@
     });
 </script>
 
-<div style=" margin-left: 0px;float: left;padding: 0;">
-
+<div style=" margin: 0;padding: 0;">
     <div class="topnews">
         <div class="xwzx_icon">
             <img src="/images/Home/xwzx.jpg" alt="推荐新闻" width="74" height="78" border="0">
@@ -34,14 +34,24 @@
         </div>
     </div>
     <div class="newsblock2c">
-        <div class="newsblock1b">
+        <div width="720px"  class="newsblock1b">
             <div width="390px" class="slider-wrapper theme-default">
                 <div width="390px" id="nivo-slider" class="nivoSlider">
-                    @foreach (var item in sliderList.Take(5))
-                    {
-                        <a href="/News/Details/@item.Id" target="_blank">
-                            <img src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" alt="" title=@item.Title />
-                        </a>
+                    @{
+                        if (sliderList.Any())
+                        {
+                            var top5News = sliderList;
+                            if (sliderList.Count() > 5)
+                            {
+                                top5News = sliderList.Take(5);
+                            }
+                            foreach (var item in top5News)
+                            {
+                                <a href="/News/Details/@item.Id" target="_blank">
+                                    <img src="/Images/SaveUpload/Uploaded/@item.ImageForTitle" alt="" title=@item.Title />
+                                </a>
+                            }
+                        }
                     }
                 </div>
             </div>
@@ -59,4 +69,13 @@
             </div>
         </div>
     </div>
+    @Html.Partial("_TopHonor")
+</div>
+
+<div class="newsblock1c">
+    @Html.Partial("_TopContents",new WebContentTypeViewModel{FirstType = "学校荣誉",SecondType = "学生荣誉"})
+</div>
+
+<div class="newsblock1d">
+    @Html.Partial("_TopContents", new WebContentTypeViewModel { FirstType = "工会", SecondType = "团委学生会" })
 </div>

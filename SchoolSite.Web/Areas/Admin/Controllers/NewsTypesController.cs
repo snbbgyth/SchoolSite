@@ -12,7 +12,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [MyAuthorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class NewsTypesController : Controller
     {
         private INewsTypeDal _newsTypeDal;
@@ -90,15 +90,11 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(NewsType newsType)
         {
-            //if (ModelState.IsValid)
-            //{
             newsType.Creater = User.Identity.Name;
             newsType.LastModifier = User.Identity.Name;
             await _newsTypeDal.InsertAsync(newsType);
             NewsManage.RefreshNewsType();
             return RedirectToAction("Index");
-            //}
-            //return View(newsType);
         }
 
         // GET: NewsTypes/Edit/5

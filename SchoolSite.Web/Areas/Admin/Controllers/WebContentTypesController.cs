@@ -13,7 +13,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [MyAuthorize(Roles = "Admin,Edit")]
+    [Authorize(Roles = "Admin,Edit")]
     public class WebContentTypesController : BaseController
     {
 
@@ -68,7 +68,6 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(entityList.ToPagedList(pageNumber, pageSize));
-
         }
 
         // GET: Admin/WebContentTypes/Details/5
