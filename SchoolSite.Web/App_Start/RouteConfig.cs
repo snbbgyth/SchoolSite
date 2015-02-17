@@ -14,7 +14,6 @@ namespace SchoolSite.Web
                new { controller = "Home", action = "Index", id = UrlParameter.Optional, Area = "Home" },
               new string[] { "SchoolSite.Web.Controllers" }
           );
-
         }
     }
 }

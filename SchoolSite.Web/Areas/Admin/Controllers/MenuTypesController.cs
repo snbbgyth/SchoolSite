@@ -11,10 +11,11 @@ using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
 using SchoolSite.Web.Areas.Admin.Models;
 using SchoolSite.Web.DAL.Manage;
+using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
- [Authorize(Roles = "Admin")]
+ [MyAuthorize(Roles = "Admin")]
     public class MenuTypesController : Controller
     {
 
@@ -92,7 +93,6 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         {
             if (!string.IsNullOrEmpty(menuType.Name))
             {
-
                 await _menuTypeDal.ModifyAsync(menuType);
                 WebContentManage.RefreshMenuTypes();
                 return RedirectToAction("Index");

@@ -17,11 +17,6 @@ namespace SchoolSite.Core.DbModel.Mappings
             Map(x => x.Title);
             Map(x => x.ImageForTitle);
             Map(x => x.NewsTypeId);
-            //References(x => x.NewsType, "NewsTypeId").Not.LazyLoad();
-            //HasManyToMany(x => x.NewsTypeList)
-            //  .Cascade.All()
-            //  .Inverse()
-            //  .Table("NewsType");
         }
     }
 }

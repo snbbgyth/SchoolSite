@@ -66,7 +66,6 @@ namespace SchoolSite.Web.DAL.Manage
         private static void InitWebContentTypes()
         {
             _webContentTypeList = _webContentTypeDal.QueryAll().ToList();
-
         }
 
         private static void InitMenuTypes()
@@ -122,7 +121,6 @@ namespace SchoolSite.Web.DAL.Manage
             }
             else
             {
-                //int typeId = Convert.ToInt32(menuTypeId);
                 var webContentTypes = _webContentTypeList.FindAll(t => t.MenuTypeId == Convert.ToInt32(menuTypeId)); //await _webContentTypeDal.QueryByFunAsync(t => t.MenuTypeId == typeId);
                 if (webContentTypeId == null || webContentTypeId == "0")
                 {
@@ -143,7 +141,6 @@ namespace SchoolSite.Web.DAL.Manage
             foreach (var entity in entityList)
             {
                 entity.WebContentType = _webContentTypeList.Find(t => t.Id == entity.WebContentTypeId);
-                //await _webContentTypeDal.QueryByIdAsync(entity.WebContentTypeId);
             }
             return entityList;
         }
@@ -157,7 +154,5 @@ namespace SchoolSite.Web.DAL.Manage
             if (entityList.Count() < count) return entityList;
             return entityList.Take(count);
         }
-
- 
     }
 }

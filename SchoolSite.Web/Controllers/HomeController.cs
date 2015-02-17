@@ -32,24 +32,6 @@ namespace SchoolSite.Web.Controllers
             return View(webContentList.First(t=>t.DisplayOrder== webContentList.Max(c => c.DisplayOrder)));
         }
 
-        public ActionResult WebSiteProductIntro()
-        {
-            ViewBag.Title = "企业简介.";
-            return View();
-        }
-
-        public ActionResult SoftwareProductIntro()
-        {
-            ViewBag.Title = "企业简介.";
-            return View();
-        }
-
-        public ActionResult TrainProductIntro()
-        {
-            ViewBag.Title = "企业简介.";
-            return View();
-        }
-
         public async Task<ActionResult> CompanyIntro()
         {
             var webContentType = await _webContentTypeDal.FirstOrDefaultAsync(t => t.Name == "企业简介");

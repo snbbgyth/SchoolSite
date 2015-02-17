@@ -9,7 +9,6 @@ namespace SchoolSite.Core.DbModel
        [DisplayName("类型名称")]
        public virtual string Name { get; set; }
 
-
        public virtual MenuType MenuType { get; set; }
 
        public virtual int MenuTypeId { get; set; }

@@ -13,7 +13,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin,Edit")]
+    [MyAuthorize(Roles = "Admin,Edit")]
     public class WebContentsController : BaseController
     {
         private IWebContentDal _webContentDal;

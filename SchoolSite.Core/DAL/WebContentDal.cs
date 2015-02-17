@@ -20,10 +20,6 @@ namespace SchoolSite.Core.DAL
             {
                 using (var session = FluentNHibernateDal.Instance.GetSession())
                 {
-                    //var queryString = string.Format("select * from {0} where WebContentTypeId in (:ids)", typeof(WebContent).Name);
-                    //entityList = session.CreateQuery(queryString)
-                    //                .SetParameter("ids", string.Join(",", ids))
-                    //                .Future<WebContent>().ToList();
                     entityList = session.QueryOver<WebContent>().Where(Restrictions.In("WebContentTypeId", ids)).List<WebContent>();
                 }
             }

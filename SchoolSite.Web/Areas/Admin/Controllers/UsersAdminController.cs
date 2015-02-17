@@ -13,7 +13,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [MyAuthorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
 
@@ -164,15 +164,13 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             ViewBag.RoleId = new SelectList(RoleManager.Roles, "Id", "Name");
-
-
             ViewBag.UserRoleList = GetUserRole(user);
             return View(user);
         }
 
         private List<UserRoleViewModel> GetUserRole(ApplicationUser user)
         {
-            var userRoleList = new List<UserRoleViewModel> { };
+            var userRoleList = new List<UserRoleViewModel>();
             foreach (var role in user.Roles)
             {
                 var entity = RoleManager.Roles.FirstOrDefault(t => t.Id == role.RoleId);

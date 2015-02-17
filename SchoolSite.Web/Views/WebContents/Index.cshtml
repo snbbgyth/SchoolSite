@@ -10,15 +10,8 @@
         <input type="submit" value="Search" />
     </p>
 }
-
 @foreach (var item in Model)
 {
-    //{
-        //string imageForTitle = item.ImageForTitle;
-        //if (string.IsNullOrEmpty(item.ImageForTitle))
-        //{
-        //    imageForTitle = "新闻/defaultpic.gif";
-        //}
         <div>
             <h2>
                 <img width="84" height="57" alt="" src="/Images/SaveUpload/Uploaded/@item.ImageForTitle.GetImageForTitle()" />  <a href="/WebContents/Details/@item.Id">@item.Title</a>
@@ -33,11 +26,8 @@
                     最后修改时间 @item.LastModifyDate
                 </div>
             </div>
-
             <p>@Html.Raw(item.Content.StripTagsRegex().ToSummary(100))</p>
-
         </div>
-    @*};*@
 }
 
 <br />

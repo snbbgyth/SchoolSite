@@ -26,7 +26,6 @@ namespace SchoolSite.Web
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            // FunnelWeb Database
             builder.RegisterModule(new CoreModule());
             return builder.Build();
         }

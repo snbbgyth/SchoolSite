@@ -32,9 +32,7 @@ namespace SchoolSite.Core.DbModel
 
         public virtual WebContentType WebContentType { get; set; }
 
-
         public virtual IEnumerable<WebContentType> WebContentTypeList { get; set; }
-
 
     }
 }

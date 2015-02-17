@@ -12,7 +12,7 @@ using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin,Edit")]
+    [MyAuthorize(Roles = "Admin,Edit")]
     public class NewsController : BaseController
     {
         private INewsDal _newsDal;
@@ -83,12 +83,11 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(News news)
         {
-
+            if (string.IsNullOrEmpty(news.Title) || string.IsNullOrEmpty(news.Content))
+                return View(news);
             InitInsert(news);
             await _newsDal.InsertAsync(news);
             return RedirectToAction("Index");
-
-            return View(news);
         }
 
         // GET: /News/Edit/5

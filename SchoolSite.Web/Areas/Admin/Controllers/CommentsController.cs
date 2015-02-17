@@ -8,13 +8,12 @@ using Microsoft.AspNet.Identity;
 using PagedList;
 using SchoolSite.Core.DbModel;
 using SchoolSite.Core.IDAL;
-using SchoolSite.Web.Areas.Admin.Models;
 using SchoolSite.Web.DAL.Manage;
 using SchoolSite.Web.DAL.MySql;
 
 namespace SchoolSite.Web.Areas.Admin.Controllers
 {
-    [Authorize]
+    [MyAuthorize]
     public class CommentsController : Controller
     {
         private ICommentDal _commentDal;
