@@ -18,13 +18,12 @@ namespace SchoolSite.Web.Areas.Admin.Controllers
     {
         private IWebContentDal _webContentDal;
         private IWebContentTypeDal _webContentTypeDal;
-        private IMenuTypeDal _menuTypeDal;
 
         public WebContentsController()
         {
             _webContentDal = DependencyResolver.Current.GetService<IWebContentDal>();
             _webContentTypeDal = DependencyResolver.Current.GetService<IWebContentTypeDal>();
-            _menuTypeDal = DependencyResolver.Current.GetService<IMenuTypeDal>();
+  
         }
 
         // GET: Admin/WebContents
